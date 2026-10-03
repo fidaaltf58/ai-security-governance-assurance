@@ -1,0 +1,54 @@
+{% extends "base.html" %}
+{% block title %}Executive Dashboard · AI Security Governance{% endblock %}
+{% block content %}
+<h1>Executive Dashboard</h1>
+<p class="lead">Assurance posture across the AI system inventory.</p>
+
+<section class="kpis">
+  <div class="kpi"><span class="num">{{ metrics.system_count }}</span><span class="lbl">AI systems</span></div>
+  <div class="kpi"><span class="num">{{ metrics.open_finding_count }}</span><span class="lbl">Open findings</span></div>
+  <div class="kpi alert"><span class="num">{{ metrics.critical_high_count }}</span><span class="lbl">Critical / High</span></div>
+  <div class="kpi"><span class="num">{{ metrics.risk_count }}</span><span class="lbl">Risks tracked</span></div>
+  <div class="kpi good"><span class="num">{{ metrics.retest_pass_rate }}%</span><span class="lbl">Retest pass rate</span></div>
+  <div class="kpi"><span class="num">{{ metrics.owasp_coverage_count }}/10</span><span class="lbl">OWASP LLM covered</span></div>
+</section>
+
+<div class="grid2">
+  <section class="card">
+    <h2>Residual risk distribution</h2>
+    <table class="bars">
+      {% for band, count in metrics.residual_bands.items() %}
+      <tr>
+        <td class="band {{ band|lower }}">{{ band }}</td>
+        <td class="barcell"><span class="bar {{ band|lower }}" style="width: {{ (count * 48) + 8 }}px"></span> {{ count }}</td>
+      </tr>
+      {% endfor %}
+    </table>
+  </section>
+
+  <section class="card">
+    <h2>Top residual risks</h2>
+    <table>
+      <thead><tr><th>Risk</th><th>System</th><th>Residual</th></tr></thead>
+      <tbody>
+      {% for r in metrics.top_residual_risks %}
+        <tr>
+          <td>{{ r.title }}</td>
+          <td class="muted">{{ r.system_name }}</td>
+          <td><span class="pill {{ r.residual_band|lower }}">{{ r.residual_score }} · {{ r.residual_band }}</span></td>
+        </tr>
+      {% endfor %}
+      </tbody>
+    </table>
+  </section>
+</div>
+
+<section class="card">
+  <h2>OWASP LLM Top 10 coverage</h2>
+  <div class="chips">
+    {% for id, name in owasp.items() %}
+      <span class="chip {% if id in metrics.owasp_coverage %}on{% endif %}">{{ id }} {{ name }}</span>
+    {% endfor %}
+  </div>
+</section>
+{% endblock %}

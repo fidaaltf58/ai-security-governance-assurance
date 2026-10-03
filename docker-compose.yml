@@ -1,0 +1,16 @@
+# One command to a populated dashboard:  docker compose up --build
+# then open http://localhost:8000
+services:
+  app:
+    build: .
+    ports:
+      - "8000:8000"
+    environment:
+      AIGOV_ENV: demo
+      AIGOV_DB_PATH: /data/governance.db
+    volumes:
+      - governance-data:/data
+    restart: unless-stopped
+
+volumes:
+  governance-data:

@@ -1,0 +1,4 @@
+# Normalise line endings: store text as LF in the repo.
+* text=auto eol=lf
+*.png binary
+*.svg text eol=lf

@@ -1,0 +1,38 @@
+# Python
+__pycache__/
+*.py[cod]
+*.egg-info/
+.eggs/
+build/
+dist/
+.venv/
+venv/
+env/
+
+# Test / lint caches
+.pytest_cache/
+.ruff_cache/
+.coverage
+htmlcov/
+
+# Local database and runtime data (never commit real data)
+data/*.db
+data/*.sqlite
+*.db
+*.sqlite
+
+# Secrets — never commit any of these
+.env
+.env.*
+!.env.example
+*.pem
+*.key
+credentials.json
+aws_access_key_id
+aws_secret_access_key
+
+# Editor / OS
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db

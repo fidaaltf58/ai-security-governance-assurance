@@ -1,0 +1,27 @@
+{% extends "base.html" %}
+{% block title %}Risk Register{% endblock %}
+{% block content %}
+<h1>Risk Register</h1>
+<p class="lead">Inherent vs. residual risk after applied controls. Residual = inherent × (1 − control effectiveness).</p>
+<section class="card">
+  <table>
+    <thead><tr><th>Risk</th><th>System</th><th>RMF</th><th>Inherent</th><th>Controls</th><th>Residual</th><th>Status</th></tr></thead>
+    <tbody>
+    {% for r in risks %}
+      <tr>
+        <td><strong>{{ r.title }}</strong>
+          <div class="muted">{{ r.description }}
+            {% if r.owasp_llm %}· {{ r.owasp_llm }}{% endif %}{% if r.mitre_atlas %} · {{ r.mitre_atlas }}{% endif %}</div>
+        </td>
+        <td class="muted">{{ r.system_name }}</td>
+        <td class="mono">{{ r.rmf_function or '—' }}</td>
+        <td><span class="pill {{ r.inherent_band|lower }}">{{ r.inherent_score }} · {{ r.inherent_band }}</span></td>
+        <td class="muted">{{ r.control_count }} ({{ (r.control_effectiveness * 100)|round|int }}%)</td>
+        <td><span class="pill {{ r.residual_band|lower }}">{{ r.residual_score }} · {{ r.residual_band }}</span></td>
+        <td><span class="pill status">{{ r.status }}</span></td>
+      </tr>
+    {% endfor %}
+    </tbody>
+  </table>
+</section>
+{% endblock %}

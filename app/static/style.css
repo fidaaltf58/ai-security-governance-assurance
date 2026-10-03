@@ -1,0 +1,68 @@
+:root {
+  --bg: #0f1420; --panel: #171e2e; --panel2: #1e2639; --line: #2a3450;
+  --txt: #e6ebf5; --muted: #8a97b3; --accent: #5b8cff;
+  --low: #3fb950; --medium: #d29922; --high: #f0883e; --critical: #f85149;
+  --good: #3fb950;
+}
+* { box-sizing: border-box; }
+body {
+  margin: 0; background: var(--bg); color: var(--txt);
+  font: 15px/1.5 "Segoe UI", system-ui, -apple-system, sans-serif;
+}
+.topbar {
+  display: flex; align-items: center; gap: 2rem; padding: 0 1.5rem;
+  background: var(--panel); border-bottom: 1px solid var(--line); flex-wrap: wrap;
+}
+.brand { font-weight: 700; padding: 1rem 0; }
+.brand span { color: var(--muted); font-weight: 400; }
+nav { display: flex; gap: 1.25rem; flex-wrap: wrap; }
+nav a { color: var(--muted); text-decoration: none; padding: 1rem 0; border-bottom: 2px solid transparent; }
+nav a:hover { color: var(--txt); border-bottom-color: var(--accent); }
+main { max-width: 1100px; margin: 2rem auto; padding: 0 1.5rem; }
+h1 { margin: 0 0 .25rem; font-size: 1.6rem; }
+.lead { color: var(--muted); margin: 0 0 1.5rem; }
+footer { max-width: 1100px; margin: 3rem auto 2rem; padding: 0 1.5rem; color: var(--muted); font-size: .85rem; }
+
+.kpis { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 1rem; margin-bottom: 1.5rem; }
+.kpi { background: var(--panel); border: 1px solid var(--line); border-radius: 10px; padding: 1.1rem; display: flex; flex-direction: column; gap: .3rem; }
+.kpi .num { font-size: 2rem; font-weight: 700; }
+.kpi .lbl { color: var(--muted); font-size: .85rem; }
+.kpi.alert .num { color: var(--critical); }
+.kpi.good .num { color: var(--good); }
+
+.grid2 { display: grid; grid-template-columns: 1fr 1fr; gap: 1.25rem; }
+@media (max-width: 760px) { .grid2 { grid-template-columns: 1fr; } }
+.card { background: var(--panel); border: 1px solid var(--line); border-radius: 10px; padding: 1.25rem; margin-bottom: 1.25rem; }
+.card h2 { margin: 0 0 1rem; font-size: 1.1rem; }
+
+table { width: 100%; border-collapse: collapse; }
+th, td { text-align: left; padding: .6rem .5rem; border-bottom: 1px solid var(--line); vertical-align: top; }
+th { color: var(--muted); font-weight: 600; font-size: .8rem; text-transform: uppercase; letter-spacing: .04em; }
+.muted { color: var(--muted); font-size: .9rem; }
+.mono { font-family: ui-monospace, "Cascadia Code", Consolas, monospace; font-size: .85rem; }
+
+.pill { display: inline-block; padding: .15rem .5rem; border-radius: 999px; font-size: .78rem; border: 1px solid var(--line); white-space: nowrap; }
+.pill.low, .band.low { color: var(--low); border-color: var(--low); }
+.pill.medium, .band.medium { color: var(--medium); border-color: var(--medium); }
+.pill.high, .band.high { color: var(--high); border-color: var(--high); }
+.pill.critical, .band.critical { color: var(--critical); border-color: var(--critical); }
+.pill.good { color: var(--good); border-color: var(--good); }
+.pill.alert { color: var(--critical); border-color: var(--critical); }
+.pill.sev-low { color: var(--low); border-color: var(--low); }
+.pill.sev-medium { color: var(--medium); border-color: var(--medium); }
+.pill.sev-high { color: var(--high); border-color: var(--high); }
+.pill.sev-critical { color: var(--critical); border-color: var(--critical); }
+.pill.sens-restricted { color: var(--critical); border-color: var(--critical); }
+.pill.sens-confidential { color: var(--high); border-color: var(--high); }
+
+.tag { display: inline-block; background: var(--panel2); border: 1px solid var(--line); border-radius: 6px; padding: .1rem .4rem; margin: 0 .25rem .25rem 0; font-size: .78rem; }
+
+.bars td { border: none; padding: .35rem .5rem; }
+.band { font-weight: 600; }
+.bar { display: inline-block; height: 12px; border-radius: 3px; vertical-align: middle; margin-right: .5rem; background: var(--accent); }
+.bar.low { background: var(--low); } .bar.medium { background: var(--medium); }
+.bar.high { background: var(--high); } .bar.critical { background: var(--critical); }
+
+.chips { display: flex; flex-wrap: wrap; gap: .5rem; }
+.chip { padding: .3rem .6rem; border: 1px dashed var(--line); border-radius: 8px; color: var(--muted); font-size: .82rem; }
+.chip.on { border-style: solid; border-color: var(--accent); color: var(--txt); background: var(--panel2); }

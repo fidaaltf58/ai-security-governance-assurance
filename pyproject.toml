@@ -1,0 +1,34 @@
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "ai-security-governance-assurance"
+version = "0.1.0"
+description = "Assurance platform for AI systems: inventory, risk register, control mapping and evidence, aligned to NIST AI RMF, OWASP LLM Top 10 and MITRE ATLAS."
+readme = "README.md"
+requires-python = ">=3.10"
+license = { text = "MIT" }
+authors = [{ name = "Fidaa Letaief" }]
+keywords = ["ai-security", "ai-governance", "nist-ai-rmf", "owasp-llm", "mitre-atlas", "risk-register"]
+
+[project.urls]
+Homepage = "https://github.com/fidaaltf58/ai-security-governance-assurance"
+Issues = "https://github.com/fidaaltf58/ai-security-governance-assurance/issues"
+
+[tool.setuptools]
+packages = ["app"]
+
+[tool.pytest.ini_options]
+addopts = "-q"
+testpaths = ["tests"]
+
+[tool.ruff]
+line-length = 120
+target-version = "py310"
+
+[tool.ruff.lint]
+select = ["E", "F", "I", "B", "UP"]
+# B008: calling Depends()/Query() in argument defaults is the documented, correct
+# FastAPI pattern, not a bug — so it is ignored project-wide.
+ignore = ["B008"]

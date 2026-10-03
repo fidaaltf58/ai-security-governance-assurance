@@ -1,0 +1,22 @@
+{% extends "base.html" %}
+{% block title %}AI System Inventory{% endblock %}
+{% block content %}
+<h1>AI System Inventory</h1>
+<p class="lead">Every AI/ML system in governance scope.</p>
+<section class="card">
+  <table>
+    <thead><tr><th>System</th><th>Type</th><th>Stage</th><th>Data sensitivity</th><th>Owner</th></tr></thead>
+    <tbody>
+    {% for s in systems %}
+      <tr>
+        <td><strong>{{ s.name }}</strong><div class="muted">{{ s.description }}</div></td>
+        <td>{{ s.model_type }}</td>
+        <td><span class="pill stage">{{ s.lifecycle_stage }}</span></td>
+        <td><span class="pill sens-{{ s.data_sensitivity }}">{{ s.data_sensitivity }}</span></td>
+        <td class="muted">{{ s.owner }}</td>
+      </tr>
+    {% endfor %}
+    </tbody>
+  </table>
+</section>
+{% endblock %}

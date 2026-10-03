@@ -1,0 +1,21 @@
+{% extends "base.html" %}
+{% block title %}Control Catalogue{% endblock %}
+{% block content %}
+<h1>Control Catalogue</h1>
+<p class="lead">Controls available to treat risks, each mapped to a framework reference.</p>
+<section class="card">
+  <table>
+    <thead><tr><th>Control</th><th>Framework</th><th>Maps to</th><th>Description</th></tr></thead>
+    <tbody>
+    {% for c in controls %}
+      <tr>
+        <td class="mono"><strong>{{ c.control_id }}</strong></td>
+        <td><span class="pill fw">{{ c.framework }}</span></td>
+        <td class="mono">{{ c.maps_to }}{% if c.maps_to in owasp %} · {{ owasp[c.maps_to] }}{% endif %}</td>
+        <td><strong>{{ c.title }}</strong><div class="muted">{{ c.description }}</div></td>
+      </tr>
+    {% endfor %}
+    </tbody>
+  </table>
+</section>
+{% endblock %}

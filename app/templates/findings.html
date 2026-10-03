@@ -1,0 +1,31 @@
+{% extends "base.html" %}
+{% block title %}Red-Team Findings{% endblock %}
+{% block content %}
+<h1>Red-Team Findings</h1>
+<p class="lead">Assessment findings, mapped to OWASP LLM Top 10 and MITRE ATLAS.</p>
+<section class="card">
+  <table>
+    <thead><tr><th>Finding</th><th>System</th><th>Severity</th><th>OWASP / ATLAS</th><th>Status</th><th>Latest retest</th></tr></thead>
+    <tbody>
+    {% for f in findings %}
+      <tr>
+        <td><strong>{{ f.title }}</strong><div class="muted">{{ f.description }}</div></td>
+        <td class="muted">{{ f.system_name }}</td>
+        <td><span class="pill sev-{{ f.severity }}">{{ f.severity }}</span></td>
+        <td class="mono">
+          {% if f.owasp_llm %}<span class="tag">{{ f.owasp_llm }} {{ owasp[f.owasp_llm] }}</span>{% endif %}
+          {% if f.mitre_atlas %}<span class="tag">{{ f.mitre_atlas }}</span>{% endif %}
+          {% if not f.owasp_llm and not f.mitre_atlas %}<span class="muted">—</span>{% endif %}
+        </td>
+        <td><span class="pill status">{{ f.status }}</span></td>
+        <td>
+          {% set r = retests[f.id] %}
+          {% if r %}<span class="pill {{ 'good' if r == 'pass' else 'alert' }}">{{ r }}</span>
+          {% else %}<span class="muted">not retested</span>{% endif %}
+        </td>
+      </tr>
+    {% endfor %}
+    </tbody>
+  </table>
+</section>
+{% endblock %}
